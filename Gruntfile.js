@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 			main: {
 				src: ['README.md', 'source/*.js'],
 				options: {
-					destination: 'docs'
+					destination: 'gh-pages/docs'
 				}
 			}
 	    },
