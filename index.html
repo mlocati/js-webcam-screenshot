@@ -2,22 +2,72 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WebcamScreenshot</title>
 <link rel="stylesheet" href="css/webcam-screenshot.css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form id="options">
-	Width: <input type="number" min="1" value="300" required id="width"><br>
-	<label><input type="checkbox" id="to-canvas" checked> draw on page</label><br>
-	<label><input type="checkbox" id="to-post"> save to server</label><br>
-	<div style="visibility: hidden; padding-left: 20px">
-		<label>URL: <input type="url" id="to-post-url" required></label><br>
-		<label>Field name: <input type="url" id="to-post-fieldname"></label>
+<div class="container">
+	<div class="header">
+		<ul class="nav nav-pills pull-right">
+			<li class="active"><a href="javascript:void(0)">Demo</a></li>
+			<li><a href="docs">Documentation</a></li>
+			<li><a href="https://github.com/mlocati/js-webcam-screenshot">Source code</a></li>
+		</ul>
+		<h3 class="text-muted">js-webcam-screenshot</h3>
 	</div>
-	<input type="submit">
-</form>
-<canvas id="canvas" style="dsiplay: none"></canvas>
+	<br />
+	<br />
+	<div class="panel panel-default"><div class="panel-body">
+		<div class="row">
+			<div class="col-lg-6">
+				<form id="options" role="form" class="form-horizontal">
+					<div class="form-group">
+						<label for="width" class="col-sm-2 control-label">Width</label>
+						<div class="col-sm-3">
+							<input type="number" min="1" value="300" required id="width" class="form-control"><br>
+						</div>
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label><input type="checkbox" id="to-canvas" checked> draw on page</label>
+							</div>
+						</div>
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label><input type="checkbox" id="to-post"> save to server</label>
+							</div>
+						</div>
+						<div class="col-sm-offset-2 col-sm-10 to-post" style="visibility: hidden;">
+							<div class="form-group">
+								<label for="to-post-url" class="col-sm-3 control-label">URL</label>
+								<div class="col-sm-6">
+									<input type="url" id="to-post-url" class="form-control" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="to-post-fieldname" class="col-sm-3 control-label">Field name</label>
+								<div class="col-sm-6">
+									<input type="text" id="to-post-fieldname" class="form-control">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary">Let's go!</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-6">
+				<canvas id="canvas" style="dsiplay: none"></canvas>
+			</div>
+		</div>
+	</div></div>
+</div>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="js/webcam-screenshot.js"></script>
 <script>
 $(document).ready(function() {
@@ -38,7 +88,8 @@ $(document).ready(function() {
 				options.postTo = $('#to-post-url').val();
 				options.postFieldname = $('#to-post-fieldname').val();
 			}
-			WebcamScreenshot(options, function(rc, result) {
+			options.dialogFramework = 'bs3';
+			WebcamScreenshot.go(options, function(rc, result) {
 				if(rc !== WebcamScreenshot.RC.OK) {
 					if(rc !== WebcamScreenshot.RC.USER_CANCELLED) {
 						alert(result);
@@ -54,10 +105,10 @@ $(document).ready(function() {
 	$('#to-post').on('change', function() {
 		var $url = $('#to-post-url');
 		if(this.checked) {
-			$url.attr('required', 'required').closest('div').css('visibility', 'visible');
+			$url.attr('required', 'required').closest('.to-post').css('visibility', 'visible');
 		}
 		else {
-			$url.removeAttr('required').closest('div').css('visibility', 'hidden');
+			$url.removeAttr('required').closest('.to-post').css('visibility', 'hidden');
 		}
 	})
 	$('#options').on('submit', function() { return false; })
