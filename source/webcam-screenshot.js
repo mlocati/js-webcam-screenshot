@@ -173,21 +173,26 @@ var WebcamScreenshot = {
 						return;
 					}
 				}
-				$.ajax({
+				var ajaxData = {
 				    url: options.postTo,
 				    data: formData,
 				    cache: false,
 				    contentType: false,
 				    processData: false,
 				    type: 'POST'
-				})
-				.fail(function(jqXHR, textStatus, errorThrown) {
-					w.alert(errorThrown);
-				})
-				.success(function(data) {
-					dispose();
-					callback(WebcamScreenshot.RC.OK);
-				});
+				};
+				if(options.postReturnDataType) {
+					ajaxData.dataType = options.postReturnDataType;
+				}
+				$.ajax(ajaxData)
+					.fail(function(jqXHR, textStatus, errorThrown) {
+						w.alert(errorThrown);
+					})
+					.success(function(data) {
+						dispose();
+						callback(WebcamScreenshot.RC.OK, data);
+					})
+				;
 				return;
 			}
 			dispose();
@@ -419,22 +424,21 @@ var WebcamScreenshot = {
 
 /** The options for [<code>go()</code> method]{@link WebcamScreenshot.go}
 * @typedef {Object} WebcamScreenshot.goOptions
-* @property {number} [width=300] - The width of the image to be taken.
+* @property {number} [width=300] - The width of the image to be taken (in pixels).
 * @property {string} [cancelText='Cancel'] - The text (html is accepted) to show for the "Cancel" button.
 * @property {string} [takeText='Take it'] - The text (html is accepted) to show for the "Take it" button.
 * @property {HTMLElement} [parent=window.document.body] - The DOM node to which we'll append our DOM nodes.
 * @property {HTMLCanvasElement|HTMLCanvasElement[]|jQuery} [canvas=null] - The &lt;canvas&gt; DOM node to which we'll render the taken shot (it can also be a jQuery object or an array of DOM nodes).
 * @property {string} [postTo] - If specified, we'll post the taken shot to this URL (as a form POST).
 * @property {string} [postFieldname] - If postTo, this will be the name of the field containing the image (defaults to WebcamScreenshot.DEFAULT_POST_FIELDNAME).
-* @property {string} [postImageFormat='png'] - The file format of the data to send (accepted values: <code>'jpg'</code>, <code>'png'</code>). 
+* @property {string} [postImageFormat='png'] - The file format of the data to send (accepted values: <code>'jpg'</code>, <code>'png'</code>).
+* @property {string} [postReturnDataType] - The type of data that you're expecting back from the server. For possible values see thee description of the <code>dataType</code> options of [<code>jQuery.ajax()</code>]{@link http://api.jquery.com/jquery.ajax/}. 
 * @property {WebcamScreenshot.goBeforePostCallback} [onBeforePost] - A function that will be called before posting the image.
-* @property {string} [dialogFramework=''] - The optional framework to use to show the dialog.
-* 
-*  Allowed values:
-*  <ul>
-* 		<li><code>bs2</code> for Bootstrap 2</li>
-*		<li><code>bs3</code> for Bootstrap 3</li>
-*		<li><code>jQueryUI</code> for jQuery UI</li>
+* @property {string} [dialogFramework] - The optional framework to use to show the dialog. Allowed values:
+* <ul>
+* 	<li><code>'bs2'</code> for Bootstrap 2</li>
+* 	<li><code>'bs3'</code> for Bootstrap 3</li>
+* 	<li><code>'jQueryUI'</code> for jQuery UI</li>
 * </ul>
 * @property {string} [dialogTitle='Screenshot from webcam'] - The title of the dialog (used only if <code>dialogFramework</code> is specified).
 */
@@ -447,7 +451,16 @@ var WebcamScreenshot = {
 /** Callback called after the [<code>go()</code> method]{@link WebcamScreenshot.go} ends.
 * @callback WebcamScreenshot.goCallback
 * @param {WebcamScreenshot.RC} code - One of the <code>WebcamScreenshot.RC</code> values.
-* @param {string} [errorDescription] - The error description (if code is not <code>WebcamScreenshot.RC.OK</code>).
+* @param {(string|Object)} [result] - This value may be:
+* <ul>
+* 	<li>If code is not <code>WebcamScreenshot.RC.OK</code> &rarr; <code>result</code> will contain error description ({string}).</li>
+* 	<li>If code is <code>WebcamScreenshot.RC.OK</code>:
+*		<ul>
+*			<li>If the <code>postTo</code> option has been specified &rarr; <code>result</code> will contain the response from the server.</li>
+*			<li>If the <code>postTo</code> optionw wasn't set &rarr; <code>result</code> will be <code>undefined</code>.</li>
+*		</ul>
+*	</li>
+* </ul>
 */
 
 w.WebcamScreenshot = WebcamScreenshot;
