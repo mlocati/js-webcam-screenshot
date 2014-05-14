@@ -722,7 +722,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam-screenshot.js.html">webcam-screenshot.js</a>, <a href="webcam-screenshot.js.html#line367">line 367</a>
+        <a href="webcam-screenshot.js.html">webcam-screenshot.js</a>, <a href="webcam-screenshot.js.html#line372">line 372</a>
     </li></ul></dd>
     
     
@@ -1094,7 +1094,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam-screenshot.js.html">webcam-screenshot.js</a>, <a href="webcam-screenshot.js.html#line422">line 422</a>
+        <a href="webcam-screenshot.js.html">webcam-screenshot.js</a>, <a href="webcam-screenshot.js.html#line427">line 427</a>
     </li></ul></dd>
     
     
@@ -1122,7 +1122,7 @@
             
                 
 <dt>
-    <h4 class="name" id="goCallback"><span class="type-signature"></span>goCallback<span class="signature">(code, <span class="optional">errorDescription</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="goCallback"><span class="type-signature"></span>goCallback<span class="signature">(code, <span class="optional">result</span>)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1197,13 +1197,16 @@
 	
         <tr>
             
-                <td class="name"><code>errorDescription</code></td>
+                <td class="name"><code>result</code></td>
             
             
             <td class="type">
             
                 
 <span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
 
 
             
@@ -1223,7 +1226,16 @@
             
             
             
-            <td class="description last">The error description (if code is not <code>WebcamScreenshot.RC.OK</code>).</td>
+            <td class="description last">This value may be:
+<ul>
+	<li>If code is not <code>WebcamScreenshot.RC.OK</code> &rarr; <code>result</code> will contain error description ({string}).</li>
+	<li>If code is <code>WebcamScreenshot.RC.OK</code>:
+		<ul>
+			<li>If the <code>postTo</code> option has been specified &rarr; <code>result</code> will contain the response from the server.</li>
+			<li>If the <code>postTo</code> optionw wasn't set &rarr; <code>result</code> will be <code>undefined</code>.</li>
+		</ul>
+	</li>
+</ul></td>
         </tr>
 	
 	
@@ -1254,7 +1266,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam-screenshot.js.html">webcam-screenshot.js</a>, <a href="webcam-screenshot.js.html#line424">line 424</a>
+        <a href="webcam-screenshot.js.html">webcam-screenshot.js</a>, <a href="webcam-screenshot.js.html#line429">line 429</a>
     </li></ul></dd>
     
     
@@ -1369,7 +1381,7 @@
                 </td>
             
             
-            <td class="description last">The width of the image to be taken.</td>
+            <td class="description last">The width of the image to be taken (in pixels).</td>
         </tr>
 	
 	
@@ -1637,6 +1649,41 @@
 	
         <tr>
             
+                <td class="name"><code>postReturnDataType</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The type of data that you're expecting back from the server. For possible values see thee description of the <code>dataType</code> options of <a href="http://api.jquery.com/jquery.ajax/"><code>jQuery.ajax()</code></a>.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
                 <td class="name"><code>onBeforePost</code></td>
             
             
@@ -1697,18 +1744,14 @@
             
                 <td class="default">
                 
-                    ''
-                
                 </td>
             
             
-            <td class="description last">The optional framework to use to show the dialog.
-
- Allowed values:
- <ul>
-		<li><code>bs2</code> for Bootstrap 2</li>
-		<li><code>bs3</code> for Bootstrap 3</li>
-		<li><code>jQueryUI</code> for jQuery UI</li>
+            <td class="description last">The optional framework to use to show the dialog. Allowed values:
+<ul>
+	<li><code>'bs2'</code> for Bootstrap 2</li>
+	<li><code>'bs3'</code> for Bootstrap 3</li>
+	<li><code>'jQueryUI'</code> for jQuery UI</li>
 </ul></td>
         </tr>
 	
@@ -1774,7 +1817,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam-screenshot.js.html">webcam-screenshot.js</a>, <a href="webcam-screenshot.js.html#line420">line 420</a>
+        <a href="webcam-screenshot.js.html">webcam-screenshot.js</a>, <a href="webcam-screenshot.js.html#line425">line 425</a>
     </li></ul></dd>
     
     
@@ -1809,7 +1852,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed May 14 2014 09:08:59 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed May 14 2014 11:41:59 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
