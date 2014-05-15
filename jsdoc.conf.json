@@ -1,0 +1,26 @@
+{
+	"template": "node_modules/ink-docstrap/template",
+	"tags": {
+		"allowUnknownTags": true
+	},
+	
+	"templates": {
+		"cleverLinks": false,
+		"monospaceLinks": false,
+		"dateFormat": "ddd MMM Do YYYY",
+		"outputSourceFiles": true,
+		"outputSourcePath": true,
+		"systemName": "js-webcam-screenshot",
+		"footer": "",
+		"copyright": "js-webcam-screenshot 2014 by Michele Locati.",
+		"navType": "vertical",
+		"theme": "cerulean",
+		"linenums": true,
+		"collapseSymbols": false,
+		"inverseNav": true
+	},
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true
+	}
+}

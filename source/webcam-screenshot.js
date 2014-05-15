@@ -453,8 +453,8 @@ var WebcamScreenshot = {
 * @param {WebcamScreenshot.RC} code - One of the <code>WebcamScreenshot.RC</code> values.
 * @param {(string|Object)} [result] - This value may be:
 * <ul>
-* 	<li>If code is not <code>WebcamScreenshot.RC.OK</code> &rarr; <code>result</code> will contain error description ({string}).</li>
-* 	<li>If code is <code>WebcamScreenshot.RC.OK</code>:
+* 	<li>If <code>code</code> is not <code>WebcamScreenshot.RC.OK</code> &rarr; <code>result</code> will contain error description ({string}).</li>
+* 	<li>If <code>code</code> is <code>WebcamScreenshot.RC.OK</code>:
 *		<ul>
 *			<li>If the <code>postTo</code> option has been specified &rarr; <code>result</code> will contain the response from the server.</li>
 *			<li>If the <code>postTo</code> optionw wasn't set &rarr; <code>result</code> will be <code>undefined</code>.</li>

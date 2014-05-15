@@ -31,12 +31,14 @@ module.exports = function(grunt) {
 			main: {
 				src: ['README.md', 'source/*.js'],
 				options: {
-					destination: 'gh-pages/docs'
+					destination: 'gh-pages/docs',
+					template: 'node_modules/ink-docstrap/template',
+					configure: 'jsdoc.conf.json'
 				}
 			}
 	    },
 	    jshint: {
-	   	 all: ['source/*.js']
+	   	 all: ['package.json', 'Gruntfile.js', 'jsdoc.conf.json', 'source/*.js']
 	     }
 	});
 	grunt.registerTask('docs', ['jsdoc']);
