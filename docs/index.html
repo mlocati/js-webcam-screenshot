@@ -74,7 +74,53 @@
 
     <section>
         <article><h1>js-webcam-screenshot</h1>
-<p>Capture screenshort from webcam via JavaScript</p></article>
+<p>Capture screenshort from webcam via JavaScript</p>
+<h2>Features</h2>
+<p>js-webcam-screenshot can capture a screenshot directly from within the browser.
+The image can then be rendered on a <code>&lt;canvas&gt;</code> and/or can be posted as a normal file upload.</p>
+<p>js-webcam-screenshot can use dialogs from various frameworks (bootstrap 2, bootstrap 3 or jQUery UI), but it also has support for a basic dialog without dependencies.</p>
+<h2>Examples</h2>
+<p>To render the screenshop to a <code>&lt;canvas&gt;</code>:</p>
+<pre><code class="lang-html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;script src=&quot;//code.jquery.com/jquery-1.11.1.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;js/webcam-screenshot.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            $(document).ready(function() {
+                WebcamScreenshot.go({
+                    width: 300,
+                    canvas: $('#destination'),
+                });
+            });
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;canvas id=&quot;destination&quot;&gt;&lt;/canvas&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Here's a sample Javascript code that posts the image to an URL:</p>
+<pre><code class="lang-javascript">WebcamScreenshot.go(
+    {
+        width: 500,
+        postTo: 'http://www.example.com/your/page',
+        postFieldname: 'webcam_shot',
+        postImageFormat: 'jpg',
+        onBeforePost: function(formData) {
+            // Here we can add custom fields to be posted
+            formData.append('myfield', 'myvalue');
+        } 
+    },
+    function(code, result) {
+        if(code === WebcamScreenshot.RC.OK) {
+            alert('Image sent. Result from server:\n' + result);
+        }
+        else {
+            alert('Error!\n' + result);
+        } 
+    }
+);</code></pre>
+<p>Take a look at the <a href="http://mlocati.github.io/js-webcam-screenshot/docs/">documentation</a> for the list of <a href="http://mlocati.github.io/js-webcam-screenshot/docs/WebcamScreenshot.html#goOptions">supported options</a> of <a href="http://mlocati.github.io/js-webcam-screenshot/docs/WebcamScreenshot.html#go">WebcamScreenshot.go</a>.</p>
+<p>There's also a <a href="http://mlocati.github.io/js-webcam-screenshot/">working demo</a> you can look at.</p></article>
     </section>
 
 
