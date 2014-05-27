@@ -1,12 +1,36 @@
 {
 	"name": "js-webcam-screenshot",
-	"version": "0.1.0",
+	"version": "0.1.1",
+	"description": "Capture screenshots from webcam via JavaScript",
+	"keywords": [
+		"javascript",
+		"webcam",
+		"screenshot",
+		"html5",
+		"canvas",
+		"video"
+	],
+	"homepage": "https://github.com/mlocati/js-webcam-screenshot",
+	"bugs": {
+		"url" : "https://github.com/mlocati/js-webcam-screenshot/issues"
+	},
+	"license": "MIT",
+	"author": "Michele Locati <mlocati@gmail.com>",
+	"scripts": {
+		"test": "grunt jshint"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mlocati/js-webcam-screenshot.git"
+	},
 	"devDependencies": {
 		"grunt": "~0.4",
 		"grunt-contrib-uglify": "~0.4",
 		"grunt-contrib-less": "~0.11",
 		"grunt-contrib-jshint": "~0.10",
 		"grunt-jsdoc": "~0.5",
-		"ink-docstrap": ">=v0.4.0-3"
-	}
+		"ink-docstrap": ">=0.4.2"
+	},
+	"private": false,
+	"preferGlobal": false
 }
